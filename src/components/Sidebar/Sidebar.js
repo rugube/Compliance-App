@@ -20,7 +20,7 @@ const Sidebar = () => (
         headerLink="/app/main"
         glyph="dashboard"
       />
-      <LinksGroup
+      {/* <LinksGroup
         header="Templates"
         headerLink="/app/typography"
         glyph="typography"
@@ -67,7 +67,7 @@ const Sidebar = () => (
         header="Analytics"
         headerLink="/app/notifications"
         glyph="notifications"
-      />
+      /> */}
     </ul>
   </nav>
 );

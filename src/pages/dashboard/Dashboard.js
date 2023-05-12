@@ -26,6 +26,7 @@ import Widget from '../../components/Widget';
 
 import { fetchPosts } from '../../actions/posts';
 import s from './Dashboard.module.scss';
+import SimplePieChart from '../charts/charts/PieChart';
 
 class Dashboard extends Component {
   /* eslint-disable */
@@ -135,43 +136,29 @@ class Dashboard extends Component {
             </Widget>
           </Col>
           <Col sm={12} md={6}>
-            <Widget title="Alerts">
-              <Alert
-                className="alert-sm"
-                color="warning"
-              >
-                <span className="fw-semi-bold">Warning:</span> Best check yo
-                self, you&#39;re not looking too good.
-              </Alert>
-              <Alert
-                className="alert-sm"
-                color="success"
-              >
-                <span className="fw-semi-bold">Success:</span> You successfully
-                read this important alert message.
-              </Alert>
-              <Alert
-                className="alert-sm"
-                color="info"
-              >
-                <span className="fw-semi-bold">Info:</span> This alert needs
-                your attention, but it&#39;s not super important.
-              </Alert>
-              <Alert
-                className="alert-sm clearfix"
-                color="danger"
-              >
-                <span className="fw-semi-bold">Danger:</span> Change this and
-                that and try again.
-                <span className="pull-right mr-sm">
-                  <Button color="danger" size="sm">
-                    Take this action
-                  </Button>
-                  <span className="px-2"> or </span>
-                  <Button color="default" size="sm">Cancel</Button>
-                </span>
-              </Alert>
-            </Widget>
+          <ListGroup>
+              <Link to="/app" className="list-group-item">
+                <i className="fa fa-phone mr-xs text-secondary" />{' '}
+                Incoming calls <Badge className="ml-xs" color="danger">3</Badge>
+              </Link>
+              <Link to="/app" className="list-group-item">
+                <i className="fa fa-bell-o mr-xs text-secondary" />{' '}
+                Notifications <Badge className="ml-xs" color="warning">6</Badge>
+              </Link>
+              <Link to="/app" className="list-group-item">
+                <i className="fa fa-comment-o mr-xs text-secondary" />{' '}
+                Messages <Badge className="ml-xs" color="success">18</Badge>
+              </Link>
+              <Link to="/app" className="list-group-item">
+                <i className="fa fa-eye mr-xs text-secondary" />{' '}
+                Visits total
+              </Link>
+              <Link to="/app" className="list-group-item">
+                <i className="fa fa-cloud mr-xs text-secondary" /> Inbox{' '}
+              </Link>
+            </ListGroup>
+
+  
           </Col>
         </Row>
         <Row>
@@ -231,72 +218,71 @@ class Dashboard extends Component {
             </Widget>
           </Col>
           <Col sm={6}>
-            <ListGroup>
-              <Link to="/app" className="list-group-item">
-                <i className="fa fa-phone mr-xs text-secondary" />{' '}
-                Incoming calls <Badge className="ml-xs" color="danger">3</Badge>
-              </Link>
-              <Link to="/app" className="list-group-item">
-                <i className="fa fa-bell-o mr-xs text-secondary" />{' '}
-                Notifications <Badge className="ml-xs" color="warning">6</Badge>
-              </Link>
-              <Link to="/app" className="list-group-item">
-                <i className="fa fa-comment-o mr-xs text-secondary" />{' '}
-                Messages <Badge className="ml-xs" color="success">18</Badge>
-              </Link>
-              <Link to="/app" className="list-group-item">
-                <i className="fa fa-eye mr-xs text-secondary" />{' '}
-                Visits total
-              </Link>
-              <Link to="/app" className="list-group-item">
-                <i className="fa fa-cloud mr-xs text-secondary" /> Inbox{' '}
-              </Link>
-            </ListGroup>
+            <Widget>
+            <Widget
+              title={<h5>Storage <span className="fw-semi-bold">Usage</span></h5>}>
+              <SimplePieChart />
+            </Widget>
+            </Widget>
+            
           </Col>
         </Row>
-        <Widget className="mt-lg" title="Some standard reactstrap components">
+  
           <Row>
             <Col sm={6}>
-              <div className="mt">
-                <Button size="sm" color="default" className="mr-sm mb-xs">
-                  Default
-                </Button>
-                <Button size="sm" color="success" className="mr-sm mb-xs">
-                  Success
-                </Button>
-                <Button size="sm" color="info" className="mr-sm mb-xs">
-                  Info
-                </Button>
-                <Button size="sm" color="warning" className="mr-sm mb-xs">
-                  Warning
-                </Button>
-                <Button size="sm" color="danger" className="mb-xs">
-                  Danger
-                </Button>
+            <Widget
+              title={
+                <div>
+                  <div className="pull-right mt-n-xs">
+                    <Link to="/app/main" className="td-underline fs-sm">Options</Link>
+                  </div>
+                  <h5 className="mt-0 mb-0">
+                    Inspections{' '}
+                    <Badge color="success" className="ml-xs">
+                      5
+                    </Badge>
+                  </h5>
+                  <p className="fs-sm mb-0 text-muted">
+                    Tasks that have been published recently
+                  </p>
+                </div>
+              }
+            >
+              <table className="table table-sm table-no-border mb-0">
+                <tbody>
+                {this.props.posts &&
+                this.props.posts.map(post => (
+                  <tr key={post.id}>
+                    <td>{this.formatDate(new Date(post.updatedAt).toLocaleString())}</td>
+                    <td>
+                      <Link to="/app/posts">{post.title}</Link>
+                    </td>
+                  </tr>
+                ))}
+                {this.props.posts &&
+                !this.props.posts.length && (
+                  mock.map(post => (
+                    <tr key={post.id}>
+                      <td>{post.updatedAt}</td>
+                      <td>
+                        <Link to="/app/posts">{post.title}</Link>
+                      </td>
+                    </tr>
+                  ))
+                )}
+                {this.props.isFetching && (
+                  <tr>
+                    <td colSpan="100">Loading...</td>
+                  </tr>
+                )}
+                </tbody>
+              </table>
+              <div className="d-flex justify-content-end">
+                <Link to="/app/posts" className="btn btn-default">
+                  View all Tasks <Badge className="ml-xs" color="danger">13</Badge>
+                </Link>
               </div>
-              <ButtonGroup className="mb">
-                <Button color="default">1</Button>
-                <Button color="default">2</Button>
-                <ButtonDropdown isOpen={this.state.isDropdownOpened} toggle={this.toggleDropdown}>
-                  <DropdownToggle color="default" caret>
-                    Dropdown
-                  </DropdownToggle>
-                  <DropdownMenu>
-                    <DropdownItem>1</DropdownItem>
-                    <DropdownItem>2</DropdownItem>
-                  </DropdownMenu>
-                </ButtonDropdown>
-              </ButtonGroup>
-              <p className="mb-0">
-                For more components please checkout{' '}
-                <a
-                  href="https://reactstrap.github.io/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  reactstrap documentation
-                </a>
-              </p>
+            </Widget>
             </Col>
             <Col sm={6}>
               <Progress className="progress-sm" color="success" value={40} />
@@ -305,7 +291,7 @@ class Dashboard extends Component {
               <Progress className="progress-sm" color="danger" value={80} />
             </Col>
           </Row>
-        </Widget>
+
       </div>
     );
   }
