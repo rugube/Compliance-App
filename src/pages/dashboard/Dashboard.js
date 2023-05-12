@@ -183,13 +183,13 @@ class Dashboard extends Component {
                     <Link to="/app/main" className="td-underline fs-sm">Options</Link>
                   </div>
                   <h5 className="mt-0 mb-0">
-                    Recent posts{' '}
+                    Tasks{' '}
                     <Badge color="success" className="ml-xs">
                       5
                     </Badge>
                   </h5>
                   <p className="fs-sm mb-0 text-muted">
-                    posts, that have been published recently
+                    Tasks that have been published recently
                   </p>
                 </div>
               }
@@ -225,7 +225,7 @@ class Dashboard extends Component {
               </table>
               <div className="d-flex justify-content-end">
                 <Link to="/app/posts" className="btn btn-default">
-                  View all Posts <Badge className="ml-xs" color="danger">13</Badge>
+                  View all Tasks <Badge className="ml-xs" color="danger">13</Badge>
                 </Link>
               </div>
             </Widget>

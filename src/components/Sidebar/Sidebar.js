@@ -21,22 +21,22 @@ const Sidebar = () => (
         glyph="dashboard"
       />
       <LinksGroup
-        header="Typography"
+        header="Templates"
         headerLink="/app/typography"
         glyph="typography"
       />
       <LinksGroup
-        header="Tables Basic"
+        header="Inspections And Records"
         headerLink="/app/tables"
         glyph="tables"
       />
       <LinksGroup
-        header="Notifications"
+        header="Schedules And Tasks"
         headerLink="/app/notifications"
         glyph="notifications"
       />
       <LinksGroup
-        header="Components"
+        header="Folder And File Organization"
         headerLink="/app/components"
         childrenLinks={[
           {
@@ -57,6 +57,16 @@ const Sidebar = () => (
           },
         ]}
         glyph="components"
+      />
+      <LinksGroup
+        header="Stock Control"
+        headerLink="/app/notifications"
+        glyph="notifications"
+      />
+      <LinksGroup
+        header="Analytics"
+        headerLink="/app/notifications"
+        glyph="notifications"
       />
     </ul>
   </nav>
